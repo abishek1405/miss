@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 from pathlib import Path
 import os
+from pickle import FALSE
 from .info import *
 
 
@@ -25,7 +26,7 @@ EMAIL_PORT = EMAIL_PORT
 BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR2 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIR = os.path.join(BASE_DIR2,'templates')
-STATIC_DIR =   os.path.join(BASE_DIR2,'static')
+STATIC_ROOT =   os.path.join(BASE_DIR2,'static')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -33,7 +34,7 @@ STATIC_DIR =   os.path.join(BASE_DIR2,'static')
 SECRET_KEY = 'ts*2txuxc0-44ob*)q=htfk$)0=&12tct%8s8ivdxzamjm7lb8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = FALSE
 
 ALLOWED_HOSTS = ['127.0.0.1','multipleauthentications.herokuapp.com']
 
@@ -132,10 +133,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
+STATIC_ROOT = os.path.join(BASE_DIR2, 'static')
+STATIC_URL = '/static/'
+
+
+STATICFILES_DIRS = (
+    ('assets', 'app-root/repo/wsgi/openshift/static'),
+
+    )
+
+
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 MEDIA_DIR = '/media/'
 
